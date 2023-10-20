@@ -15,6 +15,11 @@
 		E525B37C2AE1A4E10080213C /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E525B3672AE1A4E00080213C /* GameScene.sks */; };
 		E525B37D2AE1A4E10080213C /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E525B3682AE1A4E00080213C /* GameScene.swift */; };
 		E525B37E2AE1A4E10080213C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E525B3692AE1A4E10080213C /* Assets.xcassets */; };
+		E525B3872AE1A5220080213C /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E525B3862AE1A5220080213C /* BoardView.swift */; };
+		E525B38E2AE1A8AD0080213C /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = E525B38D2AE1A8AD0080213C /* Player.swift */; };
+		E525B3902AE1AB7E0080213C /* Piece.swift in Sources */ = {isa = PBXBuildFile; fileRef = E525B38F2AE1AB7E0080213C /* Piece.swift */; };
+		E525B3922AE1AD230080213C /* BoardPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E525B3912AE1AD230080213C /* BoardPosition.swift */; };
+		E5FC66572AE3214600EF8607 /* Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FC66562AE3214600EF8607 /* Actions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +32,11 @@
 		E525B3732AE1A4E10080213C /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		E525B3762AE1A4E10080213C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E525B3792AE1A4E10080213C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E525B3862AE1A5220080213C /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
+		E525B38D2AE1A8AD0080213C /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		E525B38F2AE1AB7E0080213C /* Piece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Piece.swift; sourceTree = "<group>"; };
+		E525B3912AE1AD230080213C /* BoardPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardPosition.swift; sourceTree = "<group>"; };
+		E5FC66562AE3214600EF8607 /* Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +62,8 @@
 		E525B3652AE1A4E00080213C /* ChessGame Shared */ = {
 			isa = PBXGroup;
 			children = (
+				E525B38C2AE1A89E0080213C /* Shared Logic */,
+				E525B38B2AE1A89A0080213C /* Model */,
 				E525B3662AE1A4E00080213C /* Actions.sks */,
 				E525B3672AE1A4E00080213C /* GameScene.sks */,
 				E525B3682AE1A4E00080213C /* GameScene.swift */,
@@ -71,12 +83,71 @@
 		E525B3702AE1A4E10080213C /* ChessGame iOS */ = {
 			isa = PBXGroup;
 			children = (
+				E525B3892AE1A88B0080213C /* Internal Logic */,
+				E525B3842AE1A4FD0080213C /* Presentation */,
 				E525B3712AE1A4E10080213C /* AppDelegate.swift */,
 				E525B3732AE1A4E10080213C /* GameViewController.swift */,
 				E525B3752AE1A4E10080213C /* Main.storyboard */,
 				E525B3782AE1A4E10080213C /* LaunchScreen.storyboard */,
 			);
 			path = "ChessGame iOS";
+			sourceTree = "<group>";
+		};
+		E525B3842AE1A4FD0080213C /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				E5FC66582AE3239C00EF8607 /* Subviews */,
+				E525B3882AE1A86C0080213C /* UIKit */,
+				E525B3852AE1A5040080213C /* SwiftUI */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		E525B3852AE1A5040080213C /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				E525B3862AE1A5220080213C /* BoardView.swift */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		E525B3882AE1A86C0080213C /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		E525B3892AE1A88B0080213C /* Internal Logic */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Internal Logic";
+			sourceTree = "<group>";
+		};
+		E525B38B2AE1A89A0080213C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E525B38D2AE1A8AD0080213C /* Player.swift */,
+				E525B38F2AE1AB7E0080213C /* Piece.swift */,
+				E525B3912AE1AD230080213C /* BoardPosition.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E525B38C2AE1A89E0080213C /* Shared Logic */ = {
+			isa = PBXGroup;
+			children = (
+				E5FC66562AE3214600EF8607 /* Actions.swift */,
+			);
+			path = "Shared Logic";
+			sourceTree = "<group>";
+		};
+		E5FC66582AE3239C00EF8607 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Subviews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,7 +224,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				E525B37D2AE1A4E10080213C /* GameScene.swift in Sources */,
+				E5FC66572AE3214600EF8607 /* Actions.swift in Sources */,
+				E525B3872AE1A5220080213C /* BoardView.swift in Sources */,
+				E525B3902AE1AB7E0080213C /* Piece.swift in Sources */,
 				E525B3742AE1A4E10080213C /* GameViewController.swift in Sources */,
+				E525B38E2AE1A8AD0080213C /* Player.swift in Sources */,
+				E525B3922AE1AD230080213C /* BoardPosition.swift in Sources */,
 				E525B3722AE1A4E10080213C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,13 +379,14 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5PVHGUKPAW;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -333,13 +410,14 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5PVHGUKPAW;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
