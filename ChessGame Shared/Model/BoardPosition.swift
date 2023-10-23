@@ -7,7 +7,60 @@
 
 import SwiftUI
 
-struct BoardLocation: Equatable {
+/*
+ // TODO: - Tasks
+ 1. A method to move a piece from one board location to another. This method can take the destination board location as a parameter and handle the logic of moving the piece from the current location to the destination location.
+ */
+
+// MARK: - ChessBoard
+struct ChessBoard {
+    /// A property to store the piece that is currently occupying the board location.
+    var pieces: [BoardLocation: Piece] = [:]
+    
+    /// A method to check if a board location is empty.
+    func isLocationEmpty(_ location: BoardLocation) -> Bool {
+        return pieces[location] == nil
+    }
+    
+    /// A method to place a piece on the board location.
+    mutating func placePiece(_ piece: Piece, at location: BoardLocation) {
+        pieces[location] = piece
+    }
+    
+    /// A method to remove a piece from the board location.
+    mutating func removePiece(at location: BoardLocation) {
+        pieces[location] = nil
+    }
+    
+    mutating func makeMove(from source: BoardLocation, to destination: BoardLocation) -> Bool {
+        // Logic to handle the move from the source location to the destination location
+        // Return true if the move is successful, false otherwise
+        // You can implement your own logic here based on the rules of chess
+        
+        // TODO: Implement the logic to validate the move and update the chessboard state
+        
+        return false // Default return value, modify as needed
+    }
+    
+    /*
+     var chessboard = Chessboard()
+
+     let piece = Piece(name: "Pawn") // Assuming you have a Piece struct with a name property
+
+     let location = BoardLocation(gridPosition: .a2)
+
+     chessboard.placePiece(piece, at: location)
+
+     print(chessboard.pieces) // Output: [BoardLocation(index: 8): Piece(name: "Pawn")]
+
+     chessboard.removePiece(at: location)
+
+     print(chessboard.pieces) // Output: [:]
+     */
+}
+
+// MARK: - BoardLocation
+struct BoardLocation: Equatable, Hashable {
     
     public enum GridPosition: Int {
         case a1; case b1; case c1; case d1; case e1; case f1; case g1; case h1
@@ -42,9 +95,4 @@ struct BoardLocation: Equatable {
         self.index = index
     }
     
-    
 }
-
-
-
-
