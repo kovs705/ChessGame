@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct BoardView: View {
+    
+    var game: Game
+    
     var body: some View {
         createChessboard()
     }
@@ -17,9 +20,12 @@ struct BoardView: View {
             ForEach(0..<8) { row in
                 HStack(spacing: 0) {
                     ForEach(0..<8) { column in
-                        Rectangle()
-                            .foregroundColor(BoardLocation(index: row * 8 + column).isDarkSquare ? .brown.opacity(0.25) : .brown)
-                            .frame(width: 45, height: 45)
+                        ZStack {
+                            Rectangle()
+                                .foregroundColor(BoardLocation(index: row * 8 + column).isDarkSquare ? .brown.opacity(0.25) : .brown)
+                                .frame(width: 45, height: 45)
+                            Text("\(BoardLocation.GridPosition(rawValue: row * 8 + column)?.rawValue ?? 0)")
+                        }
                     }
                 }
             }
@@ -27,7 +33,7 @@ struct BoardView: View {
         .overlay {
             Rectangle()
                 .stroke(lineWidth: 2)
-                .fill(Color.gray)
+                .fill(.gray)
         }
     }
 }

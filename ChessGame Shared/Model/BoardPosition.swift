@@ -33,13 +33,18 @@ struct ChessBoard {
     }
     
     mutating func makeMove(from source: BoardLocation, to destination: BoardLocation) -> Bool {
-        // Logic to handle the move from the source location to the destination location
-        // Return true if the move is successful, false otherwise
-        // You can implement your own logic here based on the rules of chess
+        guard let piece = pieces[source] else {
+            return false // No piece found at the source location
+        }
         
-        // TODO: Implement the logic to validate the move and update the chessboard state
+        // Check if the destination location is empty or contains an opponent's piece
+        if isLocationEmpty(destination) || pieces[destination]?.color != piece.color.opposite {
+            pieces[destination] = piece
+            pieces[source] = nil
+            return true // Move successful
+        }
         
-        return false // Default return value, modify as needed
+        return false // Invalid move
     }
     
     /*
