@@ -18,7 +18,7 @@ struct BoardView: View {
                 HStack(spacing: 0) {
                     ForEach(0..<8) { column in
                         Rectangle()
-                            .foregroundColor((row + column) % 2 == 0 ? .brown.opacity(0.25) : .brown)
+                            .foregroundColor(BoardLocation(index: row * 8 + column).isDarkSquare ? .brown.opacity(0.25) : .brown)
                             .frame(width: 45, height: 45)
                     }
                 }
