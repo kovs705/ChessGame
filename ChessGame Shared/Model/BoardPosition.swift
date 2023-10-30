@@ -13,9 +13,9 @@ import SwiftUI
  */
 
 // MARK: - ChessBoard
-struct ChessBoard {
+class ChessBoard: ObservableObject {
     /// A property to store the piece that is currently occupying the board location.
-    var pieces: [BoardLocation: Piece] = [:]
+    @Published var pieces: [BoardLocation: Piece] = [:]
     
     /// A method to check if a board location is empty.
     func isLocationEmpty(_ location: BoardLocation) -> Bool {
@@ -23,23 +23,28 @@ struct ChessBoard {
     }
     
     /// A method to place a piece on the board location.
-    mutating func placePiece(_ piece: Piece, at location: BoardLocation) {
+    func placePiece(_ piece: Piece, at location: BoardLocation) {
         pieces[location] = piece
     }
     
     /// A method to remove a piece from the board location.
-    mutating func removePiece(at location: BoardLocation) {
+    func removePiece(at location: BoardLocation) {
         pieces[location] = nil
     }
     
-    mutating func makeMove(from source: BoardLocation, to destination: BoardLocation) -> Bool {
-        // Logic to handle the move from the source location to the destination location
-        // Return true if the move is successful, false otherwise
-        // You can implement your own logic here based on the rules of chess
+    func makeMove(from source: BoardLocation, to destination: BoardLocation) -> Bool {
+        guard let piece = pieces[source] else {
+            return false // No piece found at the source location
+        }
         
-        // TODO: Implement the logic to validate the move and update the chessboard state
+        // Check if the destination location is empty or contains an opponent's piece
+        if isLocationEmpty(destination) || pieces[destination]?.color != piece.color.opposite {
+            pieces[destination] = piece
+            pieces[source] = nil
+            return true // Move successful
+        }
         
-        return false // Default return value, modify as needed
+        return false // Invalid move
     }
     
     /*

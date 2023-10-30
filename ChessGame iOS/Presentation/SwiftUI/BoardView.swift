@@ -8,18 +8,26 @@
 import SwiftUI
 
 struct BoardView: View {
-    var body: some View {
-        createChessboard()
-    }
     
-    @ViewBuilder func createChessboard() -> some View {
+    @StateObject var chessBoard = ChessBoard()
+    
+    var body: some View {
         VStack(spacing: 0) {
             ForEach(0..<8) { row in
                 HStack(spacing: 0) {
                     ForEach(0..<8) { column in
-                        Rectangle()
-                            .foregroundColor(BoardLocation(index: row * 8 + column).isDarkSquare ? .brown.opacity(0.25) : .brown)
-                            .frame(width: 45, height: 45)
+                        ZStack {
+                            Rectangle()
+                                .foregroundColor(BoardLocation(index: row * 8 + column).isDarkSquare ? .brown.opacity(0.25) : .brown)
+                                .frame(width: 45, height: 45)
+                            
+                            // Check if there's a piece at the current location
+                            if let piece = chessBoard.pieces[BoardLocation(index: row * 8 + column)] {
+                                Image(piece.image)
+                                    .resizable()
+                                    .frame(width: 40, height: 40)
+                            }
+                        }
                     }
                 }
             }
@@ -27,7 +35,10 @@ struct BoardView: View {
         .overlay {
             Rectangle()
                 .stroke(lineWidth: 2)
-                .fill(Color.gray)
+                .fill(.gray)
+        }
+        .onAppear {
+            chessBoard.placeAll()
         }
     }
 }

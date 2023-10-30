@@ -12,9 +12,35 @@ import SwiftUI
  
  */
 
+enum Color {
+    case white
+    case black
+    
+    var opposite: Color {
+        return self == .white ? .black : .white
+    }
+}
+
 struct Piece: Equatable {
     let type: PieceType
     let color: Color
+    
+    var image: String {
+        switch type {
+        case .pawn:
+            return "\(color == .white ? "w" : "b")pawn"
+        case .rook:
+            return "\(color == .white ? "w" : "b")rook"
+        case .knight:
+            return "\(color == .white ? "w" : "b")knight"
+        case .bishop:
+            return "\(color == .white ? "w" : "b")bishop"
+        case .queen:
+            return "\(color == .white ? "w" : "b")queen"
+        case .king:
+            return "\(color == .white ? "w" : "b")king"
+        }
+    }
     
     public internal(set) var tag: Int!
     public internal(set) var hasMoved = false
@@ -84,7 +110,7 @@ public enum PieceType: Int {
 extension Piece {
     /// A method to calculate the possible moves for each type of chess piece.
     func calculatePossibleMoves(board: [[Piece?]]) -> [BoardLocation] {
-        var possibleMoves: [BoardLocation] = []
+        let possibleMoves: [BoardLocation] = [] // var
         
         switch self.type {
         case .pawn:
@@ -114,9 +140,9 @@ extension Piece {
     func isValidMove(destination: BoardLocation, board: [[Piece?]]) -> Bool {
         /*
          In this example, the isValidMove method is added as an extension to the Piece model. It takes the destination location and the current state of the board as parameters.
-
+         
          Inside the method, the calculatePossibleMoves method is called to get the possible moves for the piece. The possibleMoves array is then checked to see if it contains the destination location. If the destination location is found in the possibleMoves array, it means that the move is valid and the method returns true. Otherwise, it returns false.
-
+         
          You can use this method to check if a move is valid for a specific piece by calling it on an instance of the Piece model and passing in the destination location and the current state of the chessboard.
          */
         let possibleMoves = calculatePossibleMoves(board: board)
@@ -131,6 +157,12 @@ extension Piece {
          To use this method, you can call it on an instance of the Piece model after validating a move and passing in the destination location. This will update the location property of the piece to the new location.
          */
         self.location = destination
+    }
+    
+    func getPieceAtLocation(_ location: BoardLocation) -> Piece? {
+        // Implement your logic to retrieve the piece at the given location from your game state
+        // Return the piece if it exists, otherwise return nil
+        return nil
     }
     
     
