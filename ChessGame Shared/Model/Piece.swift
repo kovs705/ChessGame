@@ -25,6 +25,23 @@ struct Piece: Equatable {
     let type: PieceType
     let color: Color
     
+    var image: String {
+        switch type {
+        case .pawn:
+            return "\(color == .white ? "w" : "b")pawn"
+        case .rook:
+            return "\(color == .white ? "w" : "b")rook"
+        case .knight:
+            return "\(color == .white ? "w" : "b")knight"
+        case .bishop:
+            return "\(color == .white ? "w" : "b")bishop"
+        case .queen:
+            return "\(color == .white ? "w" : "b")queen"
+        case .king:
+            return "\(color == .white ? "w" : "b")king"
+        }
+    }
+    
     public internal(set) var tag: Int!
     public internal(set) var hasMoved = false
     public internal(set) var canBeTakenByEnPassant = false

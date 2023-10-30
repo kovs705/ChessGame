@@ -19,6 +19,7 @@
 		E525B38E2AE1A8AD0080213C /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = E525B38D2AE1A8AD0080213C /* Player.swift */; };
 		E525B3902AE1AB7E0080213C /* Piece.swift in Sources */ = {isa = PBXBuildFile; fileRef = E525B38F2AE1AB7E0080213C /* Piece.swift */; };
 		E525B3922AE1AD230080213C /* BoardPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E525B3912AE1AD230080213C /* BoardPosition.swift */; };
+		E59027D92AF0391E0079FD46 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59027D82AF0391E0079FD46 /* GameViewModel.swift */; };
 		E5FC66572AE3214600EF8607 /* Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FC66562AE3214600EF8607 /* Actions.swift */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +37,7 @@
 		E525B38D2AE1A8AD0080213C /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		E525B38F2AE1AB7E0080213C /* Piece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Piece.swift; sourceTree = "<group>"; };
 		E525B3912AE1AD230080213C /* BoardPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardPosition.swift; sourceTree = "<group>"; };
+		E59027D82AF0391E0079FD46 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		E5FC66562AE3214600EF8607 /* Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				E525B3862AE1A5220080213C /* BoardView.swift */,
+				E59027D82AF0391E0079FD46 /* GameViewModel.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E59027D92AF0391E0079FD46 /* GameViewModel.swift in Sources */,
 				E525B37D2AE1A4E10080213C /* GameScene.swift in Sources */,
 				E5FC66572AE3214600EF8607 /* Actions.swift in Sources */,
 				E525B3872AE1A5220080213C /* BoardView.swift in Sources */,
