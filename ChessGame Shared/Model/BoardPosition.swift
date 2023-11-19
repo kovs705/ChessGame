@@ -17,9 +17,29 @@ class ChessBoard: ObservableObject {
     /// A property to store the piece that is currently occupying the board location.
     @Published var pieces: [BoardLocation: Piece] = [:]
     
+    /// A property to store possible moves of peice
+    @Published var possibleMoves: [BoardLocation] = []
+    
     /// A method to check if a board location is empty.
     func isLocationEmpty(_ location: BoardLocation) -> Bool {
         return pieces[location] == nil
+    }
+    
+    func selectPiece(at location: BoardLocation) {
+        var allPossibleMoves: [BoardLocation] = []
+
+        var board: [[Piece?]] = Array(repeating: Array(repeating: nil, count: 8), count: 8)
+        for (location, piece) in pieces {
+            let x = location.index % 8
+            let y = location.index / 8
+            board[y][x] = piece
+        }
+
+        if let piece = pieces[location] {
+            allPossibleMoves += piece.calculatePossibleMoves(board: board)
+        }
+
+        possibleMoves = allPossibleMoves
     }
     
     /// A method to place a piece on the board location.
@@ -44,7 +64,12 @@ class ChessBoard: ObservableObject {
             return true // Move successful
         }
         
+        
         return false // Invalid move
+    }
+    
+    func clearMoves() {
+        possibleMoves.removeAll()
     }
     
     /*

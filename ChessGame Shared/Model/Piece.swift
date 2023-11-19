@@ -110,27 +110,106 @@ public enum PieceType: Int {
 extension Piece {
     /// A method to calculate the possible moves for each type of chess piece.
     func calculatePossibleMoves(board: [[Piece?]]) -> [BoardLocation] {
-        let possibleMoves: [BoardLocation] = [] // var
+        var possibleMoves: [BoardLocation] = []
+        
+        let x = self.location.index % 8
+        let y = (self.location.index / 8)
         
         switch self.type {
         case .pawn:
-            // Logic for calculating possible moves for a pawn
-            break
+            // Pawns can move forward one square, if that square is unoccupied.
+            // If it has not yet moved, the pawn has the option of moving two squares forward, provided both squares in front of the pawn are unoccupied.
+            // A pawn cannot move forward if there is another piece directly in front of it.
+            // Pawns are the only pieces that capture differently from how they move. They can capture an enemy piece on either of the two spaces adjacent to the space in front of them, but cannot move to these spaces if they are vacant.
+            // En passant: A pawn can capture an opponent's pawn that has just moved two squares forward, provided the pawn is on the same file and the opponent's pawn is on the square diagonally in front of the pawn.
+            // Pawn promotion: A pawn can be promoted to a queen, rook, bishop, or knight when it reaches the opposite side of the board.
+            if y > 0 {
+                if board[y-1][x] == nil {
+                    possibleMoves.append(BoardLocation(index: self.location.index - 8))
+                    if y == 6 && board[y-2][x] == nil {
+                        possibleMoves.append(BoardLocation(index: self.location.index - 16))
+                    }
+                }
+                if x > 0 && board[y-1][x-1]?.color != self.color {
+                    possibleMoves.append(BoardLocation(index: self.location.index - 9))
+                }
+                if x < 7 && board[y-1][x+1]?.color != self.color {
+                    possibleMoves.append(BoardLocation(index: self.location.index - 7))
+                }
+            }
         case .rook:
-            // Logic for calculating possible moves for a rook
-            break
+            // Rooks can move any number of squares along any rank or file, but may not leap over other pieces.
+            // Castling: A king and a rook can move at the same time if the king has not moved and the rook has not moved and the squares between them are unoccupied.
+            for i in 1...7 {
+                if x > i && board[y][x-i] == nil {
+                    possibleMoves.append(BoardLocation(index: self.location.index - i))
+                }
+                if x < 7 - i && board[y][x+i] == nil {
+                    possibleMoves.append(BoardLocation(index: self.location.index + i))
+                }
+                if y > i && board[y-i][x] == nil {
+                    possibleMoves.append(BoardLocation(index: self.location.index - i*8))
+                }
+                if y < 7 - i && board[y+i][x] == nil {
+                    possibleMoves.append(BoardLocation(index: self.location.index + i*8))
+                }
+            }
         case .knight:
-            // Logic for calculating possible moves for a knight
-            break
+            // Knights move to any of the squares immediately adjacent to it and then make one further step at a right angle. This two-step move is called a "knight's move."
+            let knightMoves = [(1, 2), (2, 1), (2, -1), (1, -2), (-1, -2), (-2, -1), (-2, 1), (-1, 2)]
+            for move in knightMoves {
+                let newX = x + move.0
+                let newY = y + move.1
+                if newX >= 0 && newX < 8 && newY >= 0 && newY < 8 && board[newY][newX]?.color != self.color {
+                    possibleMoves.append(BoardLocation(index: newY*8 + newX))
+                }
+            }
         case .bishop:
-            // Logic for calculating possible moves for a bishop
-            break
+            // Bishops can move any number of squares diagonally.
+            for i in 1...7 {
+                if x > i && y > i && board[y-i][x-i] == nil {
+                    possibleMoves.append(BoardLocation(index: self.location.index - i*9))
+                }
+                if x < 7 - i && y > i && board[y-i][x+i] == nil {
+                    possibleMoves.append(BoardLocation(index: self.location.index - i*7))
+                }
+                if x > i && y < 7 - i && board[y+i][x-i] == nil {
+                    possibleMoves.append(BoardLocation(index: self.location.index + i*7))
+                }
+                if x < 7 - i && y < 7 - i && board[y+i][x+i] == nil {
+                    possibleMoves.append(BoardLocation(index: self.location.index + i*9))
+                }
+            }
         case .queen:
-            // Logic for calculating possible moves for a queen
-            break
+            // Queens can move any number of squares along a rank, file or diagonal.
+            for i in 1...7 {
+                if x > i && board[y][x-i] == nil {
+                    possibleMoves.append(BoardLocation(index: self.location.index - i))
+                }
+                if x < 7 - i && board[y][x+i] == nil {
+                    possibleMoves.append(BoardLocation(index: self.location.index + i))
+                }
+                if y > i && board[y-i][x] == nil {
+                    possibleMoves.append(BoardLocation(index: self.location.index - i*8))
+                }
+                if y < 7 - i && board[y+i][x] == nil {
+                    possibleMoves.append(BoardLocation(index: self.location.index + i*8))
+                }
+                if x < 7 - i && y < 7 - i && board[y+i][x+i] == nil {
+                    possibleMoves.append(BoardLocation(index: self.location.index + i*9))
+                }
+            }
         case .king:
-            // Logic for calculating possible moves for a king
-            break
+            // Kings can move one square in any direction: forward, backward, to the left, or to the right.
+            // Castling: A king and a rook can move at the same time if the king has not moved and the rook has not moved and the squares between them are unoccupied.
+            let kingMoves = [(0, 1), (1, 1), (1, 0), (1, -1), (0, -1), (-1, -1), (-1, 0), (-1, 1)]
+            for move in kingMoves {
+                let newX = x + move.0
+                let newY = y + move.1
+                if newX >= 0 && newX < 8 && newY >= 0 && newY < 8 && board[newY][newX]?.color != self.color {
+                    possibleMoves.append(BoardLocation(index: newY*8 + newX))
+                }
+            }
         }
         
         return possibleMoves
